@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="text-center text-dark">SIGN UP</h2>
+          <div *ngIf="successMessage" class="text text-center text-success">
+            <h3>{{ successMessage }}</h3>
+          </div>
+          <div *ngIf="errorMessage" class="text text-center text-danger">
+            <h3>{{ errorMessage }}</h3>
+          </div>
+          <form #registerForm="ngForm">
+            <div class="form-group">
+              <label for="firstName"></label>
+              <input type="text" #firstName="ngModel" required class="form-control" 
+              name="firstName" placeholder="First Name" [(ngModel)]="user.firstName"
+              [class.field-error]="firstName.invalid && (firstName.dirty || firstName.touched)">
+            </div>
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+              <div class="text text-danger" *ngIf="firstName.errors?.['required']">
+                First Name is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName"></label>
+              <input type="text" required  #lastName="ngModel" class="form-control" 
+              name="lastName" placeholder="Last Name" [(ngModel)]="user.lastName"
+              [class.field-error]="lastName.invalid && (lastName.dirty || lastName.touched)">
+            </div>
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+              <div class="text text-danger" *ngIf="lastName.errors?.['required']">
+                Last Name is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email"></label>
+              <input type="text" #email="ngModel" required class="form-control" 
+              name="email" placeholder="Email" [(ngModel)]="user.email"
+              [class.field-error]="email.invalid && (email.dirty || email.touched)">
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div class="text text-danger" *ngIf="email.errors?.['required']">
+                Email is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password"></label>
+              <input type="password" #password="ngModel" required class="form-control"
+               name="password" placeholder="Password" [(ngModel)]="user.password"
+               [class.field-error]="password.invalid && (password.dirty || password.touched)">
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div class="text text-danger" *ngIf="password.errors?.['required']">
+                Password is required
+              </div>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-primary form-control" type="submit"
+              [disabled]="user.firstName == '' || user.lastName == '' || user.email == '' || user.password == '' || user.firstName == null"
+              (click)="register(); registerForm.resetForm()">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
+
+  

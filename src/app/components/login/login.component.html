@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="text-center text-dark">LOGIN</h2>
+          <div *ngIf="errorMessage" class="text text-center text-danger">
+            <h3>{{ errorMessage }}</h3>
+          </div>
+          <form #loginForm="ngForm">
+            <div class="form-group">
+              <label for="email"></label>
+              <input type="text" #email="ngModel" required class="form-control" 
+              name="email" placeholder="Enter your Email" [(ngModel)]="user.email"
+              [class.field-error]="email.invalid && (email.dirty || email.touched)">
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div class="text text-danger" *ngIf="email.errors?.['required']">
+                Email is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password"></label>
+              <input type="password" required #password="ngModel" class="form-control" 
+              name="password" placeholder="Enter your Password" [(ngModel)]="user.password"
+              [class.field-error]="password.invalid && (password.dirty || password.touched)">
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div class="text text-danger" *ngIf="password.errors?.['required']">
+                Password is required
+              </div>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-primary form-control" type="submit" 
+              (click)="login(); loginForm.resetForm()">Sign In</button>
+            </div>
+            <div class="mt-4">
+              <button class="btn btn-light form-control" routerLink="/register">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
+
+  
